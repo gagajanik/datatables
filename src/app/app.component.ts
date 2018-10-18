@@ -19,7 +19,24 @@ export class AppComponent implements OnInit{
       'ordering': true,
       'info': true,
       'select': true,
-      'responsive': true
+      'responsive': true,
+      'dom': 'Brtip',
+      // Configure the buttons
+      'buttons': [
+        'columnsToggle',
+        'colvis',
+        'copy',
+        'print',
+        'excel',
+        'pdf',
+        {
+          'text': 'Some button',
+          'key': '1',
+          action: function (e, dt, node, config) {
+            alert('Button activated');
+          }
+        }
+      ]
     };
     this.dataTable = $(this.table.nativeElement);
     this.dataTable.dataTable(this.dtOptions);
