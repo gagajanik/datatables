@@ -2,13 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {DataTablesModule} from 'angular-datatables';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
-@NgModule({
+@NgModule ({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     DataTablesModule
   ],
   providers: [],

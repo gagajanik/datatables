@@ -1,4 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AppService} from './service/app.service';
+import {Product} from './objects/Product';
 declare var $;
 
 @Component({
@@ -10,11 +12,13 @@ export class AppComponent implements OnInit{
   @ViewChild('dataTable') table: ElementRef;
   dataTable: any;
   dtOptions: any;
-  constructor() {
+  products: Product[];
+  constructor(private _app: AppService) {
   }
 
   ngOnInit(): void {
-    this.dtOptions ={
+    this.getAllProducts();
+    this.dtOptions = {
       'paging': true,
       'ordering': true,
       'info': true,
@@ -39,9 +43,13 @@ export class AppComponent implements OnInit{
       ]
     };
     this.dataTable = $(this.table.nativeElement);
-    this.dataTable.dataTable(this.dtOptions);
-    $(() => {
-      alert(this.dataTable.rows().data);
+    setTimeout(() =>
+    {this.dataTable.dataTable(this.dtOptions)}, 1000 );
+
+  }
+  getAllProducts() {
+    return this._app.getAllProducts().subscribe(data => {
+      return this.products = <Product[]> data['products'];
     });
   }
 }
